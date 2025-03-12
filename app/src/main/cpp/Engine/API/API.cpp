@@ -281,7 +281,9 @@ void **Il2Cpp::GetAssemblies(size_t size) {
     return il2cpp_domain_get_assemblies(il2cpp_domain_get(), &size);
 }
 
-
+void *Il2Cpp::Invoke(void* method, void* obj, void** params, void* exec){
+    il2cpp_runtime_invoke(method, obj, params, exec);
+}
 
 const void *Il2Cpp::GetClassAtCount(const void *image, size_t index) {
     return il2cpp_image_get_class(image, index);

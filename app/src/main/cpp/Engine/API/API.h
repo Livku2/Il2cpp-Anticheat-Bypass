@@ -61,6 +61,8 @@ namespace Il2Cpp {
 
     void *GetClassType(const char *image, const char *namespaze, const char *clazz);
 
+    void *Invoke(void* method, void* obj, void** params, void* exec);
+
     void *GetFieldType(void* field);
 
     void* ClassGetMethods(void *klass, void* *iter);
