@@ -107,14 +107,14 @@ void lib_main() {
         //LoadScene = (void (*)(int))(reinterpret_cast<uint8_t*>(map.startAddress) + 0x4D3FA28);
 
         //setHook(Equals1, "Equals1");
-        setHook(SetActive, "SetActive");
+        //setHook(SetActive, "SetActive");
         setHook(DirectoryExists, "DirectoryExists");
         setHook(FileExists, "FileExists");
         setHook(Quit1, "Quit1");
         setHook(Quit2, "Quit2");
         setHook(Destroy1, "Destroy1");
         setHook(Destroy2, "Destroy2");
-        setHook(isEditor, "isEditor");
+        //setHook(isEditor, "isEditor");
         setHook(LoadScene1,"LoadScene1");
         setHook(LoadScene2,"LoadScene2");
         //setHook(get_IsCheatDetected,"get_IsCheatDetected");
