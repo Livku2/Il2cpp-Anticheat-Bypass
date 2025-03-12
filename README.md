@@ -2,6 +2,8 @@
 
 Includes bypass for lemonloader check
 
+# WILL NOT PREVENT BANS
+
 ### How to use
 
 Download the library from https://github.com/Livku2/Il2cpp-Anticheat-Bypass/releases/download/V1/libAntiCheatBypass.so
