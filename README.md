@@ -1,3 +1,7 @@
+### Il2cpp-AntiCheat-Bypass
+
+Includes bypass for lemonloader check
+
 ### How to use
 
 Download the library from https://github.com/Livku2/Il2cpp-Anticheat-Bypass/releases/download/V1/libAntiCheatBypass.so
