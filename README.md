@@ -1,7 +1,10 @@
 ### How to use
+
+Download the library from https://github.com/Livku2/Il2cpp-Anticheat-Bypass/releases/download/V1/libAntiCheatBypass.so
+
 You have to decompile the apk
 
-then go to the libs/arm64-8va folder and add this file
+then go to the libs/arm64-8va folder and add the anti-cheat bypass
 
 then go to smali/com/unity3d/player and open UnityPlayerActivity.smali
 
