@@ -78,26 +78,26 @@ uint64_t new_GetLoggedInUserID(uint64_t* self) {
     return result;
 }
 
-// Optional hooks for other common anti-cheat:
+// Optional hook for unity anticheat:
 void (*OnCheatingDetected)(void *) = nullptr;
 void new_OnCheatingDetected(void* self) {
-    LOGI("[Bypass] OnCheatingDetected called");
+    LOGI("Bypass OnCheatingDetected");
 }
 
 bool (*get_IsCheatDetected)(void *) = nullptr;
 bool new_get_IsCheatDetected(void* self) {
-    LOGI("[Bypass] get_IsCheatDetected called");
+    LOGI("Bypass get_IsCheatDetected");
     return false;
 }
 
 void (*SpeedHack_OnCheatingDetected)(void *) = nullptr;
 void new_SpeedHack_OnCheatingDetected(void* self) {
-    LOGI("[Bypass] SpeedHack OnCheatingDetected called");
+    LOGI("Bypass SpeedHack OnCheatingDetected");
 }
 
 bool (*SpeedHack_get_IsCheatDetected)(void *) = nullptr;
 bool new_SpeedHack_get_IsCheatDetected(void* self) {
-    LOGI("[Bypass] SpeedHack get_IsCheatDetected called");
+    LOGI("Bypass SpeedHack get_IsCheatDetected");
     return false;
 }
 
