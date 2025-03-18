@@ -44,30 +44,6 @@ bool new_isEditor(void* self) {
     return true;
 }
 
-// Hooks
-void (*OnCheatingDetected)(void *) = nullptr;
-void new_OnCheatingDetected(void* self) {
-    LOGI("[Bypass] OnCheatingDetected called");
-}
-
-bool (*get_IsCheatDetected)(void *) = nullptr;
-bool new_get_IsCheatDetected(void* self) {
-    LOGI("[Bypass] get_IsCheatDetected called");
-    return false;
-}
-
-// Optional hooks for other common anti-cheats:
-void (*SpeedHack_OnCheatingDetected)(void *) = nullptr;
-void new_SpeedHack_OnCheatingDetected(void* self) {
-    LOGI("[Bypass] SpeedHack OnCheatingDetected called");
-}
-
-bool (*SpeedHack_get_IsCheatDetected)(void *) = nullptr;
-bool new_SpeedHack_get_IsCheatDetected(void* self) {
-    LOGI("[Bypass] SpeedHack get_IsCheatDetected called");
-    return false;
-}
-
 void (*LoadScene1)(void *, int*) = nullptr;
 void new_LoadScene1(void* self, int* sceneBuildIndex) {
     LOGI("LoadScene Called: %p", sceneBuildIndex);
@@ -102,7 +78,28 @@ uint64_t new_GetLoggedInUserID(uint64_t* self) {
     return result;
 }
 
-void (*LoadScene)(int sceneBuildIndex);
+// Optional hooks for other common anti-cheat:
+void (*OnCheatingDetected)(void *) = nullptr;
+void new_OnCheatingDetected(void* self) {
+    LOGI("[Bypass] OnCheatingDetected called");
+}
+
+bool (*get_IsCheatDetected)(void *) = nullptr;
+bool new_get_IsCheatDetected(void* self) {
+    LOGI("[Bypass] get_IsCheatDetected called");
+    return false;
+}
+
+void (*SpeedHack_OnCheatingDetected)(void *) = nullptr;
+void new_SpeedHack_OnCheatingDetected(void* self) {
+    LOGI("[Bypass] SpeedHack OnCheatingDetected called");
+}
+
+bool (*SpeedHack_get_IsCheatDetected)(void *) = nullptr;
+bool new_SpeedHack_get_IsCheatDetected(void* self) {
+    LOGI("[Bypass] SpeedHack get_IsCheatDetected called");
+    return false;
+}
 
 __attribute__ ((constructor))
 void lib_main() {
