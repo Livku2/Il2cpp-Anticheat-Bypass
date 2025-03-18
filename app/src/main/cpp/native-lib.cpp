@@ -44,16 +44,30 @@ bool new_isEditor(void* self) {
     return true;
 }
 
+// Hooks
+void (*OnCheatingDetected)(void *) = nullptr;
+void new_OnCheatingDetected(void* self) {
+    LOGI("[Bypass] OnCheatingDetected called");
+}
+
 bool (*get_IsCheatDetected)(void *) = nullptr;
 bool new_get_IsCheatDetected(void* self) {
-    LOGI("Bypass get_IsCheatDetected");
+    LOGI("[Bypass] get_IsCheatDetected called");
     return false;
 }
 
-void (*OnCheatingDetected)(void *) = nullptr;
-void new_OnCheatingDetected(void* self) {
-    LOGI("Bypass OnCheatingDetected");
+// Optional hooks for other common anti-cheats:
+void (*SpeedHack_OnCheatingDetected)(void *) = nullptr;
+void new_SpeedHack_OnCheatingDetected(void* self) {
+    LOGI("[Bypass] SpeedHack OnCheatingDetected called");
 }
+
+bool (*SpeedHack_get_IsCheatDetected)(void *) = nullptr;
+bool new_SpeedHack_get_IsCheatDetected(void* self) {
+    LOGI("[Bypass] SpeedHack get_IsCheatDetected called");
+    return false;
+}
+
 void (*LoadScene1)(void *, int*) = nullptr;
 void new_LoadScene1(void* self, int* sceneBuildIndex) {
     LOGI("LoadScene Called: %p", sceneBuildIndex);
@@ -74,6 +88,18 @@ void new_SetActive(void* self, bool*) {
 bool (*Equals1)(void *, int*) = nullptr;
 bool new_Equals1(void* self, int* obj) {
     return true;
+}
+
+bool (*get_IsError)(void *) = nullptr;
+bool new_get_IsError(void* self) {
+    return false;
+}
+// For Debugging
+uint64_t (*GetLoggedInUserID)(uint64_t*) = nullptr;
+uint64_t new_GetLoggedInUserID(uint64_t* self) {
+    uint64_t result = GetLoggedInUserID(self);
+    LOGI("USER ID: %llu", result);
+    return result;
 }
 
 void (*LoadScene)(int sceneBuildIndex);
@@ -100,29 +126,39 @@ void lib_main() {
         setPointer(isEditor, "UnityEngine.CoreModule.dll", "UnityEngine", "Application", "get_isEditor", 0);
         setPointer(LoadScene1, "UnityEngine.CoreModule.dll", "UnityEngine.SceneManagement", "SceneManager", "LoadScene", 1);
         setPointer(LoadScene2, "UnityEngine.CoreModule.dll", "UnityEngine.SceneManagement", "SceneManager", "LoadScene", 2);
-        //setPointer(get_IsCheatDetected, "ACTk.Runtime.dll", "CodeStage.AntiCheat.Detectors", "ACTkDetectorBase`1", "get_IsCheatDetected", 0);
-        //setPointer(OnCheatingDetected, "ACTk.Runtime.dll", "CodeStage.AntiCheat.Detectors", "ACTkDetectorBase`1", "OnCheatingDetected", 0);
-        //setPointer(Equals1, "mscorlib.dll", "System", "Int32", "Equals", 1);
 
-        //LoadScene = (void (*)(int))(reinterpret_cast<uint8_t*>(map.startAddress) + 0x4D3FA28);
-
-        //setHook(Equals1, "Equals1");
-        //setHook(SetActive, "SetActive");
         setHook(DirectoryExists, "DirectoryExists");
         setHook(FileExists, "FileExists");
         setHook(Quit1, "Quit1");
         setHook(Quit2, "Quit2");
         setHook(Destroy1, "Destroy1");
         setHook(Destroy2, "Destroy2");
-        //setHook(isEditor, "isEditor");
         setHook(LoadScene1,"LoadScene1");
         setHook(LoadScene2,"LoadScene2");
-        //setHook(get_IsCheatDetected,"get_IsCheatDetected");
-        //setHook(OnCheatingDetected,"OnCheatingDetected");
 
-        //sleep(5);
 
-        //LoadScene(1);
+
+        //OVR Stuff For Oculus
+        setPointer(get_IsError, "Oculus.Platform.dll", "Oculus.Platform", "Message", "get_IsError", 0);
+        setHook(get_IsError, "get_IsError");
+        
+        
+        //setPointer(GetLoggedInUserID, "Oculus.Platform.dll", "Oculus.Platform", "Users", "GetLoggedInUserID", 0);
+        //setHook(GetLoggedInUserID, "GetLoggedInUserID");
+
+
+        //For that unity store thing
+        setPointer(OnCheatingDetected, "ACTk.Runtime.dll", "CodeStage.AntiCheat.Detectors", "InjectionDetector", "OnCheatingDetected", 0);
+        setHook(OnCheatingDetected, "OnCheatingDetected");
+
+        setPointer(get_IsCheatDetected, "ACTk.Runtime.dll", "CodeStage.AntiCheat.Detectors", "InjectionDetector", "get_IsCheatDetected", 0);
+        setHook(get_IsCheatDetected, "get_IsCheatDetected");
+
+        setPointer(SpeedHack_OnCheatingDetected, "ACTk.Runtime.dll", "CodeStage.AntiCheat.Detectors", "SpeedHackDetector", "OnCheatingDetected", 0);
+        setHook(SpeedHack_OnCheatingDetected, "SpeedHack_OnCheatingDetected");
+
+        setPointer(SpeedHack_get_IsCheatDetected, "ACTk.Runtime.dll", "CodeStage.AntiCheat.Detectors", "SpeedHackDetector", "get_IsCheatDetected", 0);
+        setHook(SpeedHack_get_IsCheatDetected, "SpeedHack_get_IsCheatDetected");
 
     }).detach();
 }
