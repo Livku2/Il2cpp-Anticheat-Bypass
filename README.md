@@ -6,7 +6,7 @@ Includes bypass for lemonloader check
 
 ### How to use
 
-Download the library from https://github.com/Livku2/Il2cpp-Anticheat-Bypass/releases/download/V1.1/libAntiCheatBypass.so
+Download the library from https://github.com/Livku2/Il2cpp-Anticheat-Bypass/releases/download/V1.2/libAntiCheatBypass.so
 
 You have to decompile the apk
 
