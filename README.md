@@ -25,3 +25,7 @@ invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
 
 ![image](https://github.com/user-attachments/assets/cecc47d5-5905-4da5-aad4-1a4b285bb363)
 
+
+
+# THERE ARE ISSUES IN SOME GAMES, I AM TRYING TO FIND A SOLUTION
+
